@@ -38,4 +38,46 @@ describe Parser do
       )
     end
   end
+
+  describe '.sort_by_views' do
+    it "Displays a list of webpages by descending views and alphabetical pages" do
+      expect(parser_test.sort_by_views(count_unique_views)).to eq (
+        "
+        /help_page/1
+        Unique views: 3
+
+        /home
+        Unique views: 3
+
+        /about
+        Unique views: 1
+
+        /about/2
+        Unique views: 1
+
+        /contact
+        Unique views: 1
+        "
+      )
+
+      expect(parser_test.sort_by_views(count_total_views)).to eq (
+        "
+        /help_page/1
+        Unique views: 3
+
+        /home
+        Unique views: 3
+        
+        /contact
+        Unique views: 2
+
+        /about
+        Unique views: 1
+
+        /about/2
+        Unique views: 1
+        "
+      )
+    end
+  end
 end
