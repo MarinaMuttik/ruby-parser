@@ -16,4 +16,8 @@ class Parser
     end
     @views_hash
   end
+
+  def count_total_views
+    'fail'
+  end
 end
