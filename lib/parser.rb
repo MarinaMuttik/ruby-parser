@@ -28,4 +28,8 @@ class Parser
     end
     @total_views_hash
   end
+
+  def webpage_views
+    'fail'
+  end
 end
