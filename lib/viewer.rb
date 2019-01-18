@@ -9,10 +9,20 @@ class Viewer
   end
 
   def split_webpage(log)
-    webpage = log.scan(/\b(\/[\w]+{1,})/).join
+    webpage = log.scan(/(\/[\w]{1,})/).join
   end
 
   def split_weblog
-    'fail'
+    @log.each_line do |line|
+      webpage = split_webpage(line)
+      ipv4 = split_ipv4(line)
+
+      if @views[webpage] == nil
+        @views.store(webpage, [ipv4])
+      else
+        @views[webpage] << ipv4
+      end
+    end
+    @views
   end
 end
