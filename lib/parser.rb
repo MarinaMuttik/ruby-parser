@@ -3,21 +3,29 @@ require 'viewer'
 class Parser
   def initialize(log)
     @viewer_log = Viewer.new(log).split_weblog
-    @views_hash = {}
+    @unique_views_hash = {}
+    @total_views_hash = {}
   end
 
   def count_unique_views
     @viewer_log.each do |webpage, ipv4_arr|
-      if @views_hash[webpage] == nil
-        @views_hash.store(webpage, ipv4_arr.uniq.count)
+      if @unique_views_hash[webpage] == nil
+        @unique_views_hash.store(webpage, ipv4_arr.uniq.count)
       else
-        @views_hash[webpage] << ipv4_arr.uniq.count
+        @unique_views_hash[webpage] << ipv4_arr.uniq.count
       end
     end
-    @views_hash
+    @unique_views_hash
   end
 
   def count_total_views
-    'fail'
+    @viewer_log.each do |webpage, ipv4_arr|
+      if @total_views_hash[webpage] == nil
+        @total_views_hash.store(webpage, ipv4_arr.count)
+      else
+        @total_views_hash[webpage] << ipv4_arr.count
+      end
+    end
+    @total_views_hash
   end
 end
