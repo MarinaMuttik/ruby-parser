@@ -2,7 +2,7 @@ require 'viewer'
 
 describe Viewer do
   let(:log) { Viewer.new }
-  let(:weblogfile) { Viewer.new('/test.log') }
+  let(:weblogfile) { Viewer.new('./lib/test.log') }
 
   describe '.split_ipv4' do
     it "Returns a valid IP of 4 sets of numbers (<12 characters) seperated by 3 periods" do
