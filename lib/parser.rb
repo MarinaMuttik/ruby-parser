@@ -42,4 +42,8 @@ class Parser
     end
     @webpage_views_hash
   end
+
+  def sort_by_views(views)
+    'fail'
+  end
 end
