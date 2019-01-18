@@ -5,7 +5,7 @@ class Parser
     @viewer_log = Viewer.new(log).split_weblog
     @unique_views_hash = {}
     @total_views_hash = {}
-    @webpage_views = {}
+    @webpage_views_hash = {}
   end
 
   def count_unique_views
@@ -34,12 +34,12 @@ class Parser
     count_unique_views
     count_total_views
     @unique_views_hash.each do |webpage, unique|
-      @webpage_views.store(webpage, {"Unique views" => unique})
+      @webpage_views_hash.store(webpage, {"Unique views" => unique})
     end
 
     @total_views_hash.each do |webpage, total|
-      @webpage_views[webpage].store("Total views", total)
+      @webpage_views_hash[webpage].store("Total views", total)
     end
-    @webpage_views 
+    @webpage_views_hash
   end
 end
