@@ -24,4 +24,15 @@ describe Parser do
           "/about"=>1 }
     end
   end
+
+  describe '.webpage_views' do
+    it "Returns a hash of webpages with hashes of unique and total view counts" do
+      parser_test.webpage_views.should ==
+      { "/help_page/1"=>{"Unique views"=>3, "Total views"=>3},
+        "/contact"=>{"Unique views"=>1, "Total views"=>2},
+        "/home"=>{"Unique views"=>3, "Total views"=>3},
+        "/about/2"=>{"Unique views"=>1, "Total views"=>1},
+        "/about"=>{"Unique views"=>1, "Total views"=>1} }
+    end
+  end
 end
