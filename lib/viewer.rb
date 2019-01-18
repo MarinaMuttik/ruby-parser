@@ -4,6 +4,6 @@ class Viewer
   end
 
   def split_webpage(log)
-    'fail'
+    webpage = log.scan(/\b(\/[\w]+{1,})/).join
   end
 end
