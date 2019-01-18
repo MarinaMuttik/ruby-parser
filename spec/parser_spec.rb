@@ -1,8 +1,7 @@
 require 'viewer'
 
 describe Viewer do
-  let(:log) { Viewer.new }
-  let(:weblogfile) { Viewer.new('./lib/test.log') }
+  let(:log) { Viewer.new('./lib/test.log') }
 
   describe '.split_ipv4' do
     it "Returns a valid IP of 4 sets of numbers (<12 characters) seperated by 3 periods" do
@@ -19,7 +18,7 @@ describe Viewer do
 
   describe '.split_weblog' do
     it "Returns a hash of webpages with ip views" do
-      weblogfile.split_weblog.should ==
+      log.split_weblog.should ==
         { "/help_page/1"=>["126.318.035.038", "929.398.951.889", "543.910.244.929"],
           "/contact"=>["184.123.665.067", "184.123.665.067"],
           "/home"=>["184.123.665.067", "235.313.352.950", "316.433.849.805"],
