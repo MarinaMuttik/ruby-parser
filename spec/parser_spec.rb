@@ -13,4 +13,15 @@ describe Parser do
           "/about"=>1 }
     end
   end
+
+  describe '.count_total_views' do
+    it "Returns a hash of webpages with total views count" do
+      parser_test.count_total_views.should ==
+        { "/help_page/1"=>3,
+          "/contact"=>2,
+          "/home"=>3,
+          "/about/2"=>1,
+          "/about"=>1 }
+    end
+  end
 end
