@@ -9,9 +9,9 @@ class Parser
   def count_unique_views
     @viewer_log.each do |webpage, ipv4_arr|
       if @views_hash[webpage] == nil
-        @views_hash.store(webpage, ipv4_arr.count)
+        @views_hash.store(webpage, ipv4_arr.uniq.count)
       else
-        @views_hash[webpage] << ipv4_arr.count
+        @views_hash[webpage] << ipv4_arr.uniq.count
       end
     end
     @views_hash
