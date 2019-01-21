@@ -101,4 +101,35 @@ Total views: 1
       ).to_stdout
     end
   end
+
+  describe '.display_webpage_views' do
+    it 'Displays results sorted by unique then total views' do
+      expect { parser_test.display_webpage_views }.to output(
+        <<-MESSAGE
+Overall webpage views
+
+/help_page/1
+3 unique views
+3 total views
+
+/home
+3 unique views
+3 total views
+
+/about
+1 unique views
+1 total views
+
+/about/2
+1 unique views
+1 total views
+
+/contact
+1 unique views
+2 total views
+
+        MESSAGE
+      ).to_stdout
+    end
+  end
 end
