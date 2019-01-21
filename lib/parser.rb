@@ -44,6 +44,6 @@ class Parser
   end
 
   def sort_by_views(views_hash)
-    'fail'
+    views_hash = views_hash.sort_by { |webpage,views| [-views, webpage] }.to_h
   end
 end
