@@ -1,9 +1,9 @@
 require 'viewer'
 
 describe Viewer do
-  let(:log) { Viewer.new('./lib/test.log') }
+  let(:log) { Viewer.new('./spec/shared/test.log') }
 
-  describe '.split_ipv4' do
+  describe '#split_ipv4' do
     it 'Returns a valid IP of 4 sets of numbers (<12 characters)
     seperated by 3 periods' do
       expect(log.split_ipv4('111.111.111.111/about')).to eq(
@@ -12,7 +12,7 @@ describe Viewer do
     end
   end
 
-  describe '.split_webpage' do
+  describe '#split_webpage' do
     it 'Returns a webpage route' do
       expect(log.split_webpage('111.111.111.111/about')).to eq(
         '/about'
@@ -23,7 +23,7 @@ describe Viewer do
     end
   end
 
-  describe '.split_weblog' do
+  describe '#split_weblog' do
     it 'Returns a hash of webpages with ip views' do
       expect(log.split_weblog).to eq(
         '/help_page/1' =>
