@@ -1,9 +1,9 @@
 require 'parser'
 
 describe Parser do
-  let(:parser_test) { Parser.new('./lib/test.log') }
+  let(:parser_test) { Parser.new('./spec/shared/test.log') }
 
-  describe '.count_unique_views' do
+  describe '#count_unique_views' do
     it 'Returns a hash of webpages with unique views count' do
       expect(parser_test.count_unique_views).to eq(
         '/help_page/1' => 3,
@@ -15,7 +15,7 @@ describe Parser do
     end
   end
 
-  describe '.count_total_views' do
+  describe '#count_total_views' do
     it 'Returns a hash of webpages with total views count' do
       expect(parser_test.count_total_views).to eq(
         '/help_page/1' => 3,
@@ -27,7 +27,7 @@ describe Parser do
     end
   end
 
-  describe '.webpage_views' do
+  describe '#webpage_views' do
     it 'Returns a hash of webpages with hashes of unique and
     total view counts' do
       expect(parser_test.webpage_views).to eq(
@@ -40,7 +40,7 @@ describe Parser do
     end
   end
 
-  describe '.sort_by_views' do
+  describe '#sort_by_views' do
     it 'Returns a hash of webpages by descending views and
     alphabetical pages' do
       expect(parser_test.count_unique_views.keys[0]).to eq(
@@ -61,74 +61,74 @@ describe Parser do
     end
   end
 
-  describe '.display_by_views' do
+  describe '#display_by_views' do
     it 'Displays results sorted by views' do
       expect { parser_test.display_by_views }.to output(
-        <<-MESSAGE
-Sorted by unique views:
-/help_page/1
-Unique views: 3
+        <<~OUTPUT
+          Sorted by unique views:
+          /help_page/1
+          Unique views: 3
 
-/home
-Unique views: 3
+          /home
+          Unique views: 3
 
-/about
-Unique views: 1
+          /about
+          Unique views: 1
 
-/about/2
-Unique views: 1
+          /about/2
+          Unique views: 1
 
-/contact
-Unique views: 1
+          /contact
+          Unique views: 1
 
-Sorted by total views:
-/help_page/1
-Total views: 3
+          Sorted by total views:
+          /help_page/1
+          Total views: 3
 
-/home
-Total views: 3
+          /home
+          Total views: 3
 
-/contact
-Total views: 2
+          /contact
+          Total views: 2
 
-/about
-Total views: 1
+          /about
+          Total views: 1
 
-/about/2
-Total views: 1
+          /about/2
+          Total views: 1
 
-        MESSAGE
+        OUTPUT
       ).to_stdout
     end
   end
 
-  describe '.display_webpage_views' do
+  describe '#display_webpage_views' do
     it 'Displays results sorted by unique then total views' do
       expect { parser_test.display_webpage_views }.to output(
-        <<-MESSAGE
-Overall webpage views
+        <<~OUTPUT
+          Overall webpage views
 
-/help_page/1
-3 unique views
-3 total views
+          /help_page/1
+          3 unique views
+          3 total views
 
-/home
-3 unique views
-3 total views
+          /home
+          3 unique views
+          3 total views
 
-/about
-1 unique views
-1 total views
+          /about
+          1 unique views
+          1 total views
 
-/about/2
-1 unique views
-1 total views
+          /about/2
+          1 unique views
+          1 total views
 
-/contact
-1 unique views
-2 total views
+          /contact
+          1 unique views
+          2 total views
 
-        MESSAGE
+        OUTPUT
       ).to_stdout
     end
   end
