@@ -5,9 +5,9 @@ class Viewer
     @views = {}
   end
 
-  # Splits the ip, but does not check for validity as numbers are usual ipv4
+  # Splits the ip, but does not check for validity as numbers for typical ipv4
   # are a maximum 0-255 for each set which would fail for the provided
-  # log. This can be added as a validation if required.
+  # log. This can be added as a validation if required
   def split_ipv4(log)
     log.scan(%r{\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}}).join
   end
