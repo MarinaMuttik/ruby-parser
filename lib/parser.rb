@@ -1,5 +1,7 @@
 require 'viewer'
 
+# Class to initialize a formatted log from Viewer, create sorted hashes for
+# views and display these results
 class Parser
   def initialize(log)
     @viewer_log = Viewer.new(log).split_weblog
@@ -10,7 +12,7 @@ class Parser
 
   def count_unique_views
     @viewer_log.each do |webpage, ipv4_arr|
-      if @unique_views_hash[webpage] == nil
+      if @unique_views_hash[webpage].nil?
         @unique_views_hash.store(webpage, ipv4_arr.uniq.count)
       else
         @unique_views_hash[webpage] << ipv4_arr.uniq.count
@@ -21,7 +23,7 @@ class Parser
 
   def count_total_views
     @viewer_log.each do |webpage, ipv4_arr|
-      if @total_views_hash[webpage] == nil
+      if @total_views_hash[webpage].nil?
         @total_views_hash.store(webpage, ipv4_arr.count)
       else
         @total_views_hash[webpage] << ipv4_arr.count
@@ -30,21 +32,24 @@ class Parser
     @total_views_hash = sort_by_views(@total_views_hash)
   end
 
+  # Method to combine total and unique views hashes to each route. As this
+  # sorts by unique views and then total views this is not used for display
+  # but is left as an avaible method if needed
   def webpage_views
     count_unique_views
     count_total_views
     @unique_views_hash.each do |webpage, unique|
-      @webpage_views_hash.store(webpage, {"Unique views" => unique})
+      @webpage_views_hash.store(webpage, 'Unique views' => unique)
     end
 
     @total_views_hash.each do |webpage, total|
-      @webpage_views_hash[webpage].store("Total views", total)
+      @webpage_views_hash[webpage].store('Total views', total)
     end
     @webpage_views_hash
   end
 
   def sort_by_views(views_hash)
-    views_hash.sort_by { |webpage,views| [-views, webpage] }.to_h
+    views_hash.sort_by { |webpage, views| [-views, webpage] }.to_h
   end
 
   def display_by_views
