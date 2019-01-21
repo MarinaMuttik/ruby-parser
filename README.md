@@ -54,13 +54,13 @@ Alternately, if using a different weblog, you may update the route in this file.
 
 ### Learning points
 
-* Using a TDD approach was a relatively new concept to me however I found it useful having to outline the steps I would take by using tests first, and meaning that each step had already been tested as I went along without needing to figure out which method or step was failing if it were done as unit testing.
-  * It also helped to set clear points at which to regularly commit than attempt large chunks at once without committing till they worked.
+* Using a TDD approach was a relatively new concept to me, however I found it useful having to outline the steps I would take by using tests first. This meant that each step had already been tested as I went along without needing to figure out which method or step was failing had it been done as a unit.
+  * It also helped to set clear points at which to regularly commit than attempt larger chunks at once without committing till they worked.
 * Initially all instance methods were public, however at the end I refactored these to private, so only the display methods I needed to call directly were public.
-  * As a result, I did have to retrospectively amend the RSpec tests for the private methods to #Test_object.send(method) in order for my original tests to remain valid.
-  * This is a compromise made in order to secure the 'black box' nature of the display methods whilst preserving the original tests with only minor modifications to keep their original functioning.
+  * As a result, I did have to retrospectively amend the RSpec tests for the private methods to #Test_object.send(:method, args) in order for my original tests to remain valid.
+  * This is a compromise made in order to secure the 'black box' nature of the display methods whilst preserving the original tests with only minor modifications.
 * RSpec testing for output displayed on the command line wasn't something I'd ever tested for before so learning the use of heredoc and output was a useful new tool.
-* The webpage views method was one I originally created before realizing that due to the test specifications, it was easier to keep total and unique views hashes separately in order to sort them both to meet the test specifications. As this and the display could still otherwise be useful I kept these in my program.
+* The webpage views method was one I originally created before realizing that due to the test specifications, it was easier to keep total and unique views hashes separately in order to sort them both to meet the test specifications. As this and the display_webpage_views methods could still otherwise be useful I kept these in my program.
 * Due to the lib folder not originally being within the load path, I had originally appended the lib folder path to the load path. On refactoring, I amended this to require_relative so I was not directly altering the load path.
 
 ### Possible improvements / development
