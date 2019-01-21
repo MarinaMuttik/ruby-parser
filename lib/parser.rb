@@ -1,4 +1,4 @@
-require 'viewer'
+require_relative 'viewer'
 
 # Class to initialize a formatted log from Viewer, create sorted hashes for
 # views and display these results
@@ -33,7 +33,7 @@ class Parser
   end
 
   # Method to combine total and unique views hashes to each route. As this
-  # sorts by unique views it is simply an additional method
+  # sorts by unique views it is simply an additional method above original task
   def webpage_views
     count_unique_views
     count_total_views
