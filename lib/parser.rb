@@ -50,7 +50,15 @@ class Parser
   # Method to display above views - this is not part of the final test but
   # left as an available method (sorted by unique views)
   def display_webpage_views
-    'fail'
+    webpage_views
+    puts 'Overall webpage views'
+    puts "\n"
+    @webpage_views_hash.each do |webpage, view_hash|
+      puts webpage
+      puts "#{view_hash.values[0]} unique views"
+      puts "#{view_hash.values[1]} total views"
+      puts "\n"
+    end
   end
 
   def sort_by_views(views_hash)
