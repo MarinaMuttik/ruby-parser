@@ -16,7 +16,7 @@ class Parser
         @unique_views_hash[webpage] << ipv4_arr.uniq.count
       end
     end
-    sort_by_views(@unique_views_hash)
+    @unique_views_hash = sort_by_views(@unique_views_hash)
   end
 
   def count_total_views
@@ -27,7 +27,7 @@ class Parser
         @total_views_hash[webpage] << ipv4_arr.count
       end
     end
-    sort_by_views(@total_views_hash)
+    @total_views_hash = sort_by_views(@total_views_hash)
   end
 
   def webpage_views
@@ -44,6 +44,10 @@ class Parser
   end
 
   def sort_by_views(views_hash)
-    views_hash = views_hash.sort_by { |webpage,views| [-views, webpage] }.to_h
+    views_hash.sort_by { |webpage,views| [-views, webpage] }.to_h
+  end
+
+  def display_by_views
+    'fail'
   end
 end
