@@ -40,43 +40,21 @@ describe Parser do
   end
 
   describe '.sort_by_views' do
-    it "Displays a list of webpages by descending views and alphabetical pages" do
-      expect(parser_test.sort_by_views(@unique_views_hash)).to eq (
-        "
-        /help_page/1
-        Unique views: 3
-
-        /home
-        Unique views: 3
-
-        /about
-        Unique views: 1
-
-        /about/2
-        Unique views: 1
-
-        /contact
-        Unique views: 1
-        "
+    it "Returns a hash of webpages by descending views and alphabetical pages" do
+      expect(parser_test.count_unique_views.keys[0]).to eq (
+        "/help_page/1"
       )
 
-      expect(parser_test.sort_by_views(@total_views_hash)).to eq (
-        "
-        /help_page/1
-        Unique views: 3
+      expect(parser_test.count_unique_views.keys[-1]).to eq (
+        "/contact"
+      )
 
-        /home
-        Unique views: 3
+      expect(parser_test.count_total_views.keys[0]).to eq (
+        "/help_page/1"
+      )
 
-        /contact
-        Unique views: 2
-
-        /about
-        Unique views: 1
-
-        /about/2
-        Unique views: 1
-        "
+      expect(parser_test.count_total_views.keys[-1]).to eq (
+        "/about/2"
       )
     end
   end
