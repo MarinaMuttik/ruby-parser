@@ -58,4 +58,45 @@ describe Parser do
       )
     end
   end
+
+  describe '.display_by_views' do
+    it "Displays results sorted by views" do
+      expect{parser_test.display_by_views}.to output(
+        <<-MESSAGE
+Sorted by unique views:
+/help_page/1
+Unique views: 3
+
+/home
+Unique views: 3
+
+/about
+Unique views: 1
+
+/about/2
+Unique views: 1
+
+/contact
+Unique views: 1
+
+Sorted by total views:
+/help_page/1
+Total views: 3
+
+/home
+Total views: 3
+
+/contact
+Total views: 2
+
+/about
+Total views: 1
+
+/about/2
+Total views: 1
+
+        MESSAGE
+        ).to_stdout
+    end
+  end
 end
