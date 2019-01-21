@@ -3,10 +3,11 @@ require 'viewer'
 describe Viewer do
   let(:log) { Viewer.new('./spec/shared/test.log') }
 
+  # As these describe private methods these use .send to test these
   describe '#split_ipv4' do
     it 'Returns a valid IP of 4 sets of numbers (<12 characters)
     seperated by 3 periods' do
-      expect(log.split_ipv4('111.111.111.111/about')).to eq(
+      expect(log.send(:split_ipv4, '111.111.111.111/about')).to eq(
         '111.111.111.111'
       )
     end
@@ -14,10 +15,10 @@ describe Viewer do
 
   describe '#split_webpage' do
     it 'Returns a webpage route' do
-      expect(log.split_webpage('111.111.111.111/about')).to eq(
+      expect(log.send(:split_webpage, '111.111.111.111/about')).to eq(
         '/about'
       )
-      expect(log.split_webpage('111.111.111.111/about/2')).to eq(
+      expect(log.send(:split_webpage, '111.111.111.111/about/2')).to eq(
         '/about/2'
       )
     end

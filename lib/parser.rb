@@ -10,6 +10,41 @@ class Parser
     @webpage_views_hash = {}
   end
 
+  # Method to display views sorted by unique views, then again by total views
+  def display_by_views
+    count_unique_views
+    count_total_views
+
+    puts 'Sorted by unique views:'
+    @unique_views_hash.each do |webpage, views|
+      puts webpage
+      puts "Unique views: #{views}"
+      puts "\n"
+    end
+    puts 'Sorted by total views:'
+    @total_views_hash.each do |webpage, views|
+      puts webpage
+      puts "Total views: #{views}"
+      puts "\n"
+    end
+  end
+
+  # Method to display webpage_views - this is not part of the final test but
+  # left as an available method (sorted by unique views)
+  def display_webpage_views
+    webpage_views
+    puts 'Overall webpage views'
+    puts "\n"
+    @webpage_views_hash.each do |webpage, view_hash|
+      puts webpage
+      puts "#{view_hash.values[0]} unique views"
+      puts "#{view_hash.values[1]} total views"
+      puts "\n"
+    end
+  end
+
+  private
+
   def count_unique_views
     @viewer_log.each do |webpage, ipv4_arr|
       if @unique_views_hash[webpage].nil?
@@ -32,6 +67,10 @@ class Parser
     @total_views_hash = sort_by_views(@total_views_hash)
   end
 
+  def sort_by_views(views_hash)
+    views_hash.sort_by { |webpage, views| [-views, webpage] }.to_h
+  end
+
   # Method to combine total and unique views hashes to each route. As this
   # sorts by unique views it is simply an additional method above original task
   def webpage_views
@@ -45,41 +84,5 @@ class Parser
       @webpage_views_hash[webpage].store('Total views', total)
     end
     @webpage_views_hash
-  end
-
-  # Method to display above views - this is not part of the final test but
-  # left as an available method (sorted by unique views)
-  def display_webpage_views
-    webpage_views
-    puts 'Overall webpage views'
-    puts "\n"
-    @webpage_views_hash.each do |webpage, view_hash|
-      puts webpage
-      puts "#{view_hash.values[0]} unique views"
-      puts "#{view_hash.values[1]} total views"
-      puts "\n"
-    end
-  end
-
-  def sort_by_views(views_hash)
-    views_hash.sort_by { |webpage, views| [-views, webpage] }.to_h
-  end
-
-  def display_by_views
-    count_unique_views
-    count_total_views
-
-    puts 'Sorted by unique views:'
-    @unique_views_hash.each do |webpage, views|
-      puts webpage
-      puts "Unique views: #{views}"
-      puts "\n"
-    end
-    puts 'Sorted by total views:'
-    @total_views_hash.each do |webpage, views|
-      puts webpage
-      puts "Total views: #{views}"
-      puts "\n"
-    end
   end
 end

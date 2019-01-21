@@ -5,19 +5,6 @@ class Viewer
     @views = {}
   end
 
-  # Splits the ip, but does not check for validity as numbers for typical ipv4
-  # are a maximum 0-255 for each set which would fail for the provided
-  # log. This can be added as a validation if required
-  def split_ipv4(log)
-    log.scan(%r{\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}}).join
-  end
-
-  # Splits the webpage route in a format of "/xxx" with any number of
-  # repetitions. If using webpages with https:// etc this would be adjusted
-  def split_webpage(log)
-    log.scan(%r{/[\w]{1,}}).join
-  end
-
   # Splits based on webserver providing on a line by line basis. If in one block
   # of text, a regex of the above two methods could be combined to extract
   # each log of data
@@ -33,5 +20,20 @@ class Viewer
       end
     end
     @views
+  end
+
+  private
+
+  # Splits the ip, but does not check for validity as numbers for typical ipv4
+  # are a maximum 0-255 for each set which would fail for the provided
+  # log. This can be added as a validation if required
+  def split_ipv4(log)
+    log.scan(%r{\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}}).join
+  end
+
+  # Splits the webpage route in a format of "/xxx" with any number of
+  # repetitions. If using webpages with https:// etc this would be adjusted
+  def split_webpage(log)
+    log.scan(%r{/[\w]{1,}}).join
   end
 end

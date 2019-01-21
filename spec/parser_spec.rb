@@ -3,9 +3,10 @@ require 'parser'
 describe Parser do
   let(:parser_test) { Parser.new('./spec/shared/test.log') }
 
+  # As these describe private methods these use .send to test these
   describe '#count_unique_views' do
     it 'Returns a hash of webpages with unique views count' do
-      expect(parser_test.count_unique_views).to eq(
+      expect(parser_test.send(:count_unique_views)).to eq(
         '/help_page/1' => 3,
         '/contact' => 1,
         '/home' => 3,
@@ -17,7 +18,7 @@ describe Parser do
 
   describe '#count_total_views' do
     it 'Returns a hash of webpages with total views count' do
-      expect(parser_test.count_total_views).to eq(
+      expect(parser_test.send(:count_total_views)).to eq(
         '/help_page/1' => 3,
         '/contact' => 2,
         '/home' => 3,
@@ -30,7 +31,7 @@ describe Parser do
   describe '#webpage_views' do
     it 'Returns a hash of webpages with hashes of unique and
     total view counts' do
-      expect(parser_test.webpage_views).to eq(
+      expect(parser_test.send(:webpage_views)).to eq(
         '/help_page/1' => { 'Unique views' => 3, 'Total views' => 3 },
         '/contact' => { 'Unique views' => 1, 'Total views' => 2 },
         '/home' => { 'Unique views' => 3, 'Total views' => 3 },
@@ -43,19 +44,19 @@ describe Parser do
   describe '#sort_by_views' do
     it 'Returns a hash of webpages by descending views and
     alphabetical pages' do
-      expect(parser_test.count_unique_views.keys[0]).to eq(
+      expect(parser_test.send(:count_unique_views).keys[0]).to eq(
         '/help_page/1'
       )
 
-      expect(parser_test.count_unique_views.keys[-1]).to eq(
+      expect(parser_test.send(:count_unique_views).keys[-1]).to eq(
         '/contact'
       )
 
-      expect(parser_test.count_total_views.keys[0]).to eq(
+      expect(parser_test.send(:count_total_views).keys[0]).to eq(
         '/help_page/1'
       )
 
-      expect(parser_test.count_total_views.keys[-1]).to eq(
+      expect(parser_test.send(:count_total_views).keys[-1]).to eq(
         '/about/2'
       )
     end
