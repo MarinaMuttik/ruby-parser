@@ -48,6 +48,20 @@ class Parser
   end
 
   def display_by_views
-    'fail'
+    count_unique_views
+    count_total_views
+
+    puts 'Sorted by unique views:'
+    @unique_views_hash.each do |webpage, views|
+      puts webpage
+      puts "Unique views: #{views}"
+      puts "\n"
+    end
+    puts 'Sorted by total views:'
+    @total_views_hash.each do |webpage, views|
+      puts webpage
+      puts "Total views: #{views}"
+      puts "\n"
+    end
   end
 end
