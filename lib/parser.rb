@@ -33,8 +33,7 @@ class Parser
   end
 
   # Method to combine total and unique views hashes to each route. As this
-  # sorts by unique views and then total views this is not used for display
-  # but is left as an avaible method if needed
+  # sorts by unique views it is simply an additional method
   def webpage_views
     count_unique_views
     count_total_views
@@ -46,6 +45,12 @@ class Parser
       @webpage_views_hash[webpage].store('Total views', total)
     end
     @webpage_views_hash
+  end
+
+  # Method to display above views - this is not part of the final test but
+  # left as an available method (sorted by unique views)
+  def display_webpage_views
+    'fail'
   end
 
   def sort_by_views(views_hash)
