@@ -45,29 +45,33 @@ class Parser
   end
 
   def count_unique_views
-    @viewer_log.each do |webpage, ipv4_arr|
-      if @unique_views_hash[webpage].nil?
-        @unique_views_hash.store(webpage, ipv4_arr.uniq.count)
-      else
-        @unique_views_hash[webpage] << ipv4_arr.uniq.count
-      end
-    end
+    count_views(@unique_views_hash, :uniq)
     @unique_views_hash = sort_by_views(@unique_views_hash)
   end
 
   def count_total_views
-    @viewer_log.each do |webpage, ipv4_arr|
-      if @total_views_hash[webpage].nil?
-        @total_views_hash.store(webpage, ipv4_arr.count)
-      else
-        @total_views_hash[webpage] << ipv4_arr.count
-      end
-    end
+    count_views(@total_views_hash)
     @total_views_hash = sort_by_views(@total_views_hash)
   end
 
-  def sort_by_views(views_hash)
-    views_hash.sort_by { |webpage, views| [-views, webpage] }.to_h
+  def count_views(hash, method = nil)
+    @viewer_log.each do |webpage, ipv4_arr|
+      ipv4_count = if method.nil?
+                     ipv4_arr.count
+                   else
+                     ipv4_arr.send(method).count
+                   end
+
+      if hash[webpage].nil?
+        hash.store(webpage, ipv4_count)
+      else
+        hash[webpage] << ipv4_count
+      end
+    end
+  end
+
+  def sort_by_views(hash)
+    hash.sort_by { |webpage, views| [-views, webpage] }.to_h
   end
 
   # Method to combine total and unique views hashes to each route. As this
