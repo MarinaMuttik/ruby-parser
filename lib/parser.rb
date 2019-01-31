@@ -50,22 +50,16 @@ class Parser
   end
 
   def count_total_views
-    count_views(@total_views_hash)
+    count_views(@total_views_hash, :each)
     @total_views_hash = sort_by_views(@total_views_hash)
   end
 
-  def count_views(hash, method = nil)
+  def count_views(hash, method)
     @viewer_log.each do |webpage, ipv4_arr|
-      ipv4_count = if method.nil?
-                     ipv4_arr.count
-                   else
-                     ipv4_arr.send(method).count
-                   end
-
       if hash[webpage].nil?
-        hash.store(webpage, ipv4_count)
+        hash.store(webpage, ipv4_arr.send(method).count)
       else
-        hash[webpage] << ipv4_count
+        hash[webpage] << ipv4_arr.send(method).count
       end
     end
   end
