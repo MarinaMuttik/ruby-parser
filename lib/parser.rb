@@ -15,18 +15,8 @@ class Parser
     count_unique_views
     count_total_views
 
-    puts 'Sorted by unique views:'
-    @unique_views_hash.each do |webpage, views|
-      puts webpage
-      puts "Unique views: #{views}"
-      puts "\n"
-    end
-    puts 'Sorted by total views:'
-    @total_views_hash.each do |webpage, views|
-      puts webpage
-      puts "Total views: #{views}"
-      puts "\n"
-    end
+    sort_views(@unique_views_hash, "Unique views")
+    sort_views(@total_views_hash, "Total views")
   end
 
   # Method to display webpage_views - this is not part of the final test but
@@ -44,6 +34,15 @@ class Parser
   end
 
   private
+
+  def sort_views(scope, string)
+    puts "Sorted by #{string}"
+    scope.each do |webpage, views|
+      puts webpage
+      puts "#{string}: #{views}"
+      puts "\n"
+    end
+  end
 
   def count_unique_views
     @viewer_log.each do |webpage, ipv4_arr|
