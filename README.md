@@ -69,3 +69,5 @@ Alternately, if using a different weblog, you may update the route in this file.
 * Display unique or total views from user input on the command line.
 * Save the sorted data to a file.
 * Add further IP validation within Viewer class.
+* Add error handling withing Viewer - e.g. guard clauses if string not found with error messages
+* Separate counting methods to Counter class - Parser class for displaying
