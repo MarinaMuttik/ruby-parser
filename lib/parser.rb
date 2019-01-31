@@ -15,8 +15,8 @@ class Parser
     count_unique_views
     count_total_views
 
-    sort_views(@unique_views_hash, "unique views")
-    sort_views(@total_views_hash, "total views")
+    sort_views(@unique_views_hash, 'unique views')
+    sort_views(@total_views_hash, 'total views')
   end
 
   # Method to display webpage_views - this is not part of the final test but
@@ -73,6 +73,7 @@ class Parser
   def webpage_views
     count_unique_views
     count_total_views
+
     @unique_views_hash.each do |webpage, unique|
       @webpage_views_hash.store(webpage, 'Unique views' => unique)
     end
